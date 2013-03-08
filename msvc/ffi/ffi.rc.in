@@ -1,0 +1,48 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource."
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION @FFI_MAJOR_VERSION@,@FFI_MINOR_VERSION@,@FFI_MICRO_VERSION@,0
+ PRODUCTVERSION @FFI_MAJOR_VERSION@,@FFI_MINOR_VERSION@,@FFI_MICRO_VERSION@,0
+ FILEFLAGSMASK 0x0L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "Harrison Consoles Inc."
+            VALUE "FileDescription", "Libffi"
+            VALUE "FileVersion", "@FFI_MAJOR_VERSION@, @FFI_MINOR_VERSION@, @FFI_MICRO_VERSION@, 0"
+            VALUE "InternalName", "libffi-5"
+            VALUE "LegalCopyright", "Built for Windows by John Emmas © 2012 - 2013"
+            VALUE "OriginalFilename", "libffi-5.dll"
+            VALUE "ProductName", "ffi"
+            VALUE "ProductVersion", "@FFI_MAJOR_VERSION@, @FFI_MINOR_VERSION@, @FFI_MICRO_VERSION@, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\0"
+END
+
