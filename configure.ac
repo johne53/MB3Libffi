@@ -2,7 +2,7 @@ dnl Process this with autoconf to create configure
 
 AC_PREREQ(2.68)
 
-AC_INIT([libffi], [3.0.12], [http://github.com/atgreen/libffi/issues])
+AC_INIT([libffi], [3.0.13], [http://github.com/atgreen/libffi/issues])
 AC_CONFIG_HEADERS([fficonfig.h])
 
 AC_CANONICAL_SYSTEM
@@ -199,6 +199,10 @@ case "$host" in
 	TARGET=MOXIE; TARGETDIR=moxie
 	;;
 
+  metag-*-*)
+	TARGET=METAG; TARGETDIR=metag
+	;;
+
   mips-sgi-irix5.* | mips-sgi-irix6.* | mips*-*-rtems*)
 	TARGET=MIPS; TARGETDIR=mips
 	;;
@@ -278,6 +282,7 @@ AM_CONDITIONAL(IA64, test x$TARGET = xIA64)
 AM_CONDITIONAL(M32R, test x$TARGET = xM32R)
 AM_CONDITIONAL(M68K, test x$TARGET = xM68K)
 AM_CONDITIONAL(MICROBLAZE, test x$TARGET = xMICROBLAZE)
+AM_CONDITIONAL(METAG, test x$TARGET = xMETAG)
 AM_CONDITIONAL(MOXIE, test x$TARGET = xMOXIE)
 AM_CONDITIONAL(POWERPC, test x$TARGET = xPOWERPC)
 AM_CONDITIONAL(POWERPC_AIX, test x$TARGET = xPOWERPC_AIX)
@@ -544,7 +549,7 @@ if test "x$GCC" = "xyes"; then
   multi_os_directory=`$CC -print-multi-os-directory`
   case $multi_os_directory in
     .) ;; # Avoid trailing /.
-    *) toolexeclibdir=$toolexeclibdir/$multi_os_directory ;;
+    ../*) toolexeclibdir=$toolexeclibdir/$multi_os_directory ;;
   esac
   AC_SUBST(toolexecdir)
 else
