@@ -1,11 +1,12 @@
 #! e:/program files/perl/bin/perl.exe
+#  version info can be found in 'doc/version.texi'
 
-$package_string = "\"libffi 3.0.12\"";
-$package_version = "\"3.0.12\"";
-$ffi_version = "3.0.12";
+$package_string = "\"libffi 3.0.13\"";
+$package_version = "\"3.0.13\"";
+$ffi_version = "3.0.13";
 $major = 3;
 $minor = 0;
-$micro = 12;
+$micro = 13;
 $have_long_double = 1;
 $ffi_exec_trampoline_table = 0;
 $ffi_target = "X86_WIN32";
