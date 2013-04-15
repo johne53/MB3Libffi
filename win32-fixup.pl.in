@@ -7,6 +7,7 @@ $ffi_version = "3.0.13";
 $major = 3;
 $minor = 0;
 $micro = 13;
+$interface_age = 0;
 $have_long_double = 1;
 $ffi_exec_trampoline_table = 0;
 $ffi_target = "X86_WIN32";
@@ -23,6 +24,7 @@ sub process_file
 	    s/\@FFI_MAJOR_VERSION\@/$major/g;
 	    s/\@FFI_MINOR_VERSION\@/$minor/g;
 	    s/\@FFI_MICRO_VERSION\@/$micro/g;
+	    s/\@FFI_INTERFACE_AGE\@/$interface_age/g;
 	    s/\@FFI_EXEC_TRAMPOLINE_TABLE\@/$ffi_exec_trampoline_table/g;
 	    s/\@HAVE_LONG_DOUBLE\@/$have_long_double/g;
 	    s/\@PACKAGE_STRING@/$package_string/g;
