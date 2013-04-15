@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="glib"
+	>
+	<UserMacro
+		Name="DllPrefix"
+		Value="lib"
+	/>
+	<UserMacro
+		Name="DllSuffix"
+		Value="-5"
+	/>
+	<UserMacro
+		Name="GenericIncludeFolder"
+		Value="F:\+GTK-SOURCES\gnu-windows\include"
+	/>
+	<UserMacro
+		Name="GenericWin32LibraryFolder"
+		Value="F:\+GTK-SOURCES\gnu-windows\lib\win32"
+	/>
+	<UserMacro
+		Name="Debug32TestSuiteFolder"
+		Value="..\..\..\TestApps\Debug\Mixbus\bin"
+	/>
+	<UserMacro
+		Name="Release32TestSuiteFolder"
+		Value="..\..\..\TestApps\Release\Mixbus\bin"
+	/>
+	<UserMacro
+		Name="Debug32TargetFolder"
+		Value="C:\Program Files\Mixbus\bin"
+	/>
+	<UserMacro
+		Name="Release32TargetFolder"
+		Value="E:\Mixbus\bin"
+	/>
+	<UserMacro
+		Name="TargetSxSFolder"
+		Value="F:\+GTK-SOURCES\gnu-windows\include\ardourext\sys"
+	/>
+</VisualStudioPropertySheet>
