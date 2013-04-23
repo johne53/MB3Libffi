@@ -1,23 +1,17 @@
 #! e:/program files/perl/bin/perl.exe
 #  version info can be found in 'doc/version.texi'
 
+require "../local-paths.lib";
+
 $package_string = "\"libffi 3.0.13\"";
 $package_version = "\"3.0.13\"";
 $ffi_version = "3.0.13";
 $major = 3;
 $minor = 0;
 $micro = 13;
-$interface_age = 0;
+$interface_age = 1;
 $have_long_double = 1;
 $ffi_exec_trampoline_table = 0;
-$generic_include_folder = "F:\\+GTK-SOURCES\\gnu-windows\\include";
-$generic_library_folder = "F:\\+GTK-SOURCES\\gnu-windows\\lib";
-$generic_win32_library_folder = "F:\\+GTK-SOURCES\\gnu-windows\\lib\\win32";
-$debug32_testsuite_folder = "..\\..\\..\\..\\gnu-win32\\TestApps\\Debug\\Mixbus\\bin";
-$release32_testsuite_folder = "..\\..\\..\\..\\gnu-win32\\TestApps\\Release\\Mixbus\\bin";
-$debug32_target_folder = "C:\\Program Files\\Mixbus\\bin";
-$release32_target_folder = "E:\\Mixbus\\bin";
-$target_sxs_folder = "F:\\+GTK-SOURCES\\gnu-windows\\include\\ardourext\\sys";
 $ffi_target = "X86_WIN32";
 
 sub process_file
