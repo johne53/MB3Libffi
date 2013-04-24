@@ -21,5 +21,5 @@ libffi.xcodeproj/project.xcworkspace
 ios/
 
 /ffi.vsprops
-/win32-fixup.pl
 /msvc/ffi.def
+/win32-fixup.pl.in
