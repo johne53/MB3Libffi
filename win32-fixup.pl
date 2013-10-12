@@ -3,12 +3,12 @@
 
 require "../local-paths.lib";
 
-$package_string = "\"libffi 3.0.13\"";
-$package_version = "\"3.0.13\"";
-$ffi_version = "3.0.13";
+$package_string = "\"libffi 3.0.14\"";
+$package_version = "\"3.0.14\"";
+$ffi_version = "3.0.14";
 $major = 3;
 $minor = 0;
-$micro = 13;
+$micro = 14;
 $interface_age = 1;
 $have_long_double = 1;
 $ffi_exec_trampoline_table = 0;
