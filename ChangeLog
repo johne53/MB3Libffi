@@ -1,3 +1,42 @@
+2013-10-08  Ondřej Bílka  <neleai@seznam.cz>
+
+	* src/aarch64/ffi.c, src/aarch64/sysv.S, src/arm/ffi.c,
+	src/arm/gentramp.sh, src/bfin/sysv.S, src/closures.c,
+	src/dlmalloc.c, src/ia64/ffi.c, src/microblaze/ffi.c,
+	src/microblaze/sysv.S, src/powerpc/darwin_closure.S,
+	src/powerpc/ffi.c, src/powerpc/ffi_darwin.c, src/sh/ffi.c,
+	src/tile/tile.S, testsuite/libffi.call/nested_struct11.c: Fix
+	spelling errors.
+
+2013-10-08  Anthony Green  <green@moxielogic.com>
+
+	* aclocal.m4, compile, config.guess, config.sub, depcomp,
+	install-sh, mdate-sh, missing, texinfo.tex: Update from upstream.
+	* configure.ac: Update version to 3.0.14-rc0.
+	* Makefile.in, configure, Makefile.in, include/Makefile.in,
+	man/Makefile.in, testsuite/Makefile.in: Rebuilt.
+	* README: Mention M88K and VAX.
+
+2013-07-15  Miod Vallat  <miod@openbsd.org>
+
+	* Makefile.am,
+	configure.ac,
+	src/m88k/ffi.c,
+	src/m88k/ffitarget.h,
+	src/m88k/obsd.S,
+	src/vax/elfbsd.S,
+	src/vax/ffi.c,
+	src/vax/ffitarget.h: Add m88k and vax support.
+
+2013-06-24 Alan Modra  <amodra@gmail.com>
+
+	* src/powerpc/ffi.c (ffi_prep_args_SYSV): Move var declaration
+	before statements.
+	(ffi_prep_args64): Support little-endian.
+	(ffi_closure_helper_SYSV, ffi_closure_helper_LINUX64): Likewise.
+	* src/powerpc/linux64_closure.S (ffi_closure_LINUX64): Likewise.
+	* src/powerpc/ppc_closure.S (ffi_closure_SYSV): Likewise.
+
 2013-06-12  Mischa Jonker  <mjonker@synopsys.com>
 
 	 * configure.ac: Add support for ARC.
@@ -354,7 +393,7 @@
 	(required for shared libs on cygwin/mingw).
 	* Makefile.in: Rebuilt.
 
-2012-10-31  Alan Modra  <amodra@gmail.com>
+2012-10-31  Alan Modra  <amodra@gmail.co>
 
 	* src/powerpc/linux64_closure.S: Add new ABI support.
 	* src/powerpc/linux64.S: Likewise.
