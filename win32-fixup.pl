@@ -3,6 +3,7 @@
 
 require "../local-paths.lib";
 
+$package_name = "libffi";
 $package_string = "\"libffi 3.0.14\"";
 $package_version = "\"3.0.14\"";
 $ffi_version = "3.0.14";
@@ -13,6 +14,7 @@ $interface_age = 1;
 $have_long_double = 1;
 $ffi_exec_trampoline_table = 0;
 $ffi_target = "X86_WIN32";
+$exec_prefix = "lib";
 
 sub process_file
 {
@@ -29,6 +31,7 @@ sub process_file
 	    s/\@FFI_INTERFACE_AGE\@/$interface_age/g;
 	    s/\@FFI_EXEC_TRAMPOLINE_TABLE\@/$ffi_exec_trampoline_table/g;
 	    s/\@HAVE_LONG_DOUBLE\@/$have_long_double/g;
+	    s/\@PACKAGE_NAME@/$package_name/g;
 	    s/\@PACKAGE_STRING@/$package_string/g;
 	    s/\@PACKAGE_VERSION@/$package_version/g;
 	    s/\@VERSION@/$package_version/g;
@@ -41,6 +44,9 @@ sub process_file
 	    s/\@Release32TargetFolder@/$release32_target_folder/g;
 	    s/\@TargetSxSFolder@/$target_sxs_folder/g;
 	    s/\@TARGET\@/$ffi_target/g;
+	    s/\@prefix@/$prefix/g;
+	    s/\@exec_prefix@/$exec_prefix/g;
+	    s/\@libdir@/$generic_library_folder/g;
 	    print OUTPUT;
 	}
 }
@@ -50,6 +56,7 @@ process_file ("include/ffi.h");
 
 my $command=join(' ',@ARGV);
 if ($command eq -buildall) {
+	process_file ("libffi.pc");
 	process_file ("ffi.vsprops");
 	process_file ("msvc/ffi/ffi.rc");
 }
