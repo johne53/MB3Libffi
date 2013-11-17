@@ -1,3 +1,115 @@
+2013-11-16  Alan Modra  <amodra@gmail.com>
+
+	* src/powerpc/ffi.c (ffi_prep_cif_machdep_core): Use #if _CALL_ELF
+	test to select parameter save sizing for ELFv2 vs. ELFv1.
+	* src/powerpc/ffitarget.h (FFI_V2_TYPE_FLOAT_HOMOG,
+	FFI_V2_TYPE_DOUBLE_HOMOG, FFI_V2_TYPE_SMALL_STRUCT): Define.
+	(FFI_TRAMPOLINE_SIZE): Define variant for ELFv2.
+	* src/powerpc/ffi.c (FLAG_ARG_NEEDS_PSAVE): Define.
+	(discover_homogeneous_aggregate): New function.
+	(ffi_prep_args64): Adjust start of param save area for ELFv2.
+	Handle homogenous floating point struct parms.
+	(ffi_prep_cif_machdep_core): Adjust space calculation for ELFv2.
+	Handle ELFv2 return values.  Set FLAG_ARG_NEEDS_PSAVE.  Handle
+	homogenous floating point structs.
+	(ffi_call): Increase size of smst_buffer for ELFv2.  Handle ELFv2.
+	(flush_icache): Compile for ELFv2.
+	(ffi_prep_closure_loc): Set up ELFv2 trampoline.
+	(ffi_closure_helper_LINUX64): Don't return all structs directly
+	to caller.  Handle homogenous floating point structs.  Handle
+	ELFv2 struct return values.
+	* src/powerpc/linux64.S (ffi_call_LINUX64): Set up r2 for
+	ELFv2.  Adjust toc save location.  Call function pointer using
+	r12.  Handle FLAG_RETURNS_SMST.  Don't predict branches.
+	* src/powerpc/linux64_closure.S (ffi_closure_LINUX64): Set up r2
+	for ELFv2.  Define ELFv2 versions of STACKFRAME, PARMSAVE, and
+	RETVAL.  Handle possibly missing parameter save area.  Handle
+	ELFv2 return values.
+	(.note.GNU-stack): Move inside outer #ifdef.
+
+2013-11-16  Alan Modra  <amodra@gmail.com>
+
+	* src/powerpc/ffi.c (ffi_prep_cif_machdep): Revert 2013-02-08
+	change.  Do not consume an int arg when returning a small struct
+	for FFI_SYSV ABI.
+	(ffi_call): Only use bounce buffer when FLAG_RETURNS_SMST.
+	Properly copy bounce buffer to destination.
+	* src/powerpc/sysv.S: Revert 2013-02-08 change.
+	* src/powerpc/ppc_closure.S: Remove stray '+'.
+
+2013-11-16  Alan Modra  <amodra@gmail.com>
+
+	* src/powerpc/ffi.c (ffi_prep_args64): Align struct parameters
+	according to __STRUCT_PARM_ALIGN__.
+	(ffi_prep_cif_machdep_core): Likewise.
+	(ffi_closure_helper_LINUX64): Likewise.
+
+2013-11-16  Alan Modra  <amodra@gmail.com>
+
+	* src/powerpc/linux64.S (ffi_call_LINUX64): Tweak restore of r28.
+	(.note.GNU-stack): Move inside outer #ifdef.
+	* src/powerpc/linux64_closure.S (STACKFRAME, PARMSAVE,
+	RETVAL): Define and use throughout.
+	(ffi_closure_LINUX64): Save fprs before buying stack.
+	(.note.GNU-stack): Move inside outer #ifdef.
+
+2013-11-16  Alan Modra  <amodra@gmail.com>
+
+	* src/powerpc/ffitarget.h (FFI_TARGET_SPECIFIC_VARIADIC): Define.
+	(FFI_EXTRA_CIF_FIELDS): Define.
+	* src/powerpc/ffi.c (ffi_prep_args64): Save fprs as per the
+	ABI, not to both fpr and param save area.
+	(ffi_prep_cif_machdep_core): Renamed from ffi_prep_cif_machdep.
+	Keep initial flags.  Formatting.  Remove dead FFI_LINUX_SOFT_FLOAT
+	code.
+	(ffi_prep_cif_machdep, ffi_prep_cif_machdep_var): New functions.
+	(ffi_closure_helper_LINUX64): Pass floating point as per ABI,
+	not to both fpr and parameter save areas.
+
+	* libffi/testsuite/libffi.call/cls_double_va.c (main): Correct
+	function cast and don't call ffi_prep_cif.
+	* libffi/testsuite/libffi.call/cls_longdouble_va.c (main): Likewise.
+
+2013-11-15  Andrew Haley  <aph@redhat.com>
+
+	* doc/libffi.texi (Closure Example): Fix the sample code.
+	* doc/libffi.info, doc/stamp-vti, doc/version.texi: Rebuilt.
+
+2013-11-15  Andrew Haley  <aph@redhat.com>
+
+	* testsuite/libffi.call/va_struct1.c (main): Fix broken test.
+	* testsuite/libffi.call/cls_uint_va.c (cls_ret_T_fn): Likewise
+	* testsuite/libffi.call/cls_struct_va1.c (test_fn): Likewise.
+	* testsuite/libffi.call/va_1.c (main): Likewise.
+
+2013-11-14  David Schneider  <david.schneider@bivab.de>
+
+	* src/arm/ffi.c: Fix register allocation for mixed float and
+	doubles.
+	* testsuite/libffi.call/cls_many_mixed_float_double.c: Testcase
+	for many mixed float and double arguments.
+
+2013-11-13  Alan Modra  <amodra@gmail.com>
+
+	* doc/libffi.texi (Simple Example): Correct example code.
+	* doc/libffi.info, doc/stamp-vti, doc/version.texi: Rebuilt.
+
+2013-11-13  Anthony Green  <green@moxielogic.com>
+
+	* include/ffi_common.h: Respect HAVE_ALLOCA_H for GNU compiler
+	based build. (Thanks to tmr111116 on github)
+
+2013-11-09  Anthony Green  <green@moxielogic.com>
+
+	* m4/libtool.m4: Refresh.
+	* configure, Makefile.in: Rebuilt.
+	* README: Add more notes about next release.
+
+2013-11-09  Shigeharu TAKENO  <shige@iee.niit.ac.jp>
+
+	* m4/ax_gcc_archflag.m4 (ax_gcc_arch): Don't recognize
+	UltraSPARC-IIi as ultrasparc3.
+
 2013-11-06  Mark Kettenis  <kettenis@gnu.org>
 
 	* src/x86/freebsd.S (ffi_call_SYSV): Align the stack pointer to
