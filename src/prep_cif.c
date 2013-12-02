@@ -133,6 +133,10 @@ ffi_status FFI_HIDDEN ffi_prep_cif_core(ffi_cif *cif, ffi_abi abi,
 
   cif->flags = 0;
 
+#if HAVE_LONG_DOUBLE_VARIANT
+  ffi_prep_types (abi);
+#endif
+
   /* Initialize the return type if necessary */
   if ((cif->rtype->size == 0) && (initialize_aggregate(cif->rtype) != FFI_OK))
     return FFI_BAD_TYPEDEF;
@@ -183,7 +187,7 @@ ffi_status FFI_HIDDEN ffi_prep_cif_core(ffi_cif *cif, ffi_abi abi,
 	{
 	  /* Add any padding if necessary */
 	  if (((*ptr)->alignment - 1) & bytes)
-	    bytes = ALIGN(bytes, (*ptr)->alignment);
+	    bytes = (unsigned)ALIGN(bytes, (*ptr)->alignment);
 
 #ifdef TILE
 	  if (bytes < 10 * FFI_SIZEOF_ARG &&
