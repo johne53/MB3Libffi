@@ -19,9 +19,6 @@ autom4te.cache
 libffi.xcodeproj/xcuserdata
 libffi.xcodeproj/project.xcworkspace
 ios/
-osx/
-build_*/
-
 /ffi.vsprops
 /msvc/ffi.def
 /win32-fixup.pl.in
