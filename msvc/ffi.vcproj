@@ -224,7 +224,7 @@
 			<Tool
 				Name="VCPreBuildEventTool"
 				Description="Prepare configuration files"
-				CommandLine="cd..&#x0D;&#x0A;perl win32-fixup.pl&#x0D;&#x0A;copy /Y &quot;include\ffi.h&quot; &quot;$(GenericIncludeFolder)\ffi&quot;&#x0D;&#x0A;copy /Y &quot;src\x86\ffitarget.h&quot; &quot;$(GenericIncludeFolder)\ffi&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir &quot;$(GenericLibraryFolder)\pkgconfig&quot; 2&gt; NUL&#x0D;&#x0A;mkdir &quot;$(GenericIncludeFolder)\ffi&quot; 2&gt; NUL&#x0D;&#x0A;cd..&#x0D;&#x0A;perl win32-fixup.pl&#x0D;&#x0A;copy /Y &quot;include\ffi.h&quot; &quot;$(GenericIncludeFolder)\ffi&quot;&#x0D;&#x0A;copy /Y &quot;src\x86\ffitarget.h&quot; &quot;$(GenericIncludeFolder)\ffi&quot;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
