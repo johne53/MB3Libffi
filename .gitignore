@@ -22,3 +22,5 @@ ios/
 /ffi.vsprops
 /msvc/ffi.def
 /win32-fixup.pl.in
+build_*/
+darwin_*/

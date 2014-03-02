@@ -8,7 +8,7 @@ SUBDIRS = include testsuite man
 
 EXTRA_DIST = LICENSE ChangeLog.v1 ChangeLog.libgcj configure.host	\
 	 src/aarch64/ffi.c src/aarch64/ffitarget.h src/aarch64/sysv.S	\
-	 build-ios.sh src/alpha/ffi.c src/alpha/osf.S			\
+	 src/alpha/ffi.c src/alpha/osf.S			\
 	 src/alpha/ffitarget.h src/arc/ffi.c src/arc/arcompact.S	\
 	 src/arc/ffitarget.h src/arm/ffi.c src/arm/sysv.S		\
 	 src/arm/ffitarget.h src/avr32/ffi.c src/avr32/sysv.S		\
@@ -48,8 +48,7 @@ EXTRA_DIST = LICENSE ChangeLog.v1 ChangeLog.libgcj configure.host	\
 	 ChangeLog.libffi m4/libtool.m4 m4/lt~obsolete.m4		\
 	 m4/ltoptions.m4 m4/ltsugar.m4 m4/ltversion.m4			\
 	 m4/ltversion.m4 src/arm/gentramp.sh src/debug.c msvcc.sh	\
-	 generate-ios-source-and-headers.py				\
-	 generate-osx-source-and-headers.py				\
+	 generate-darwin-source-and-headers.py				\
 	 libffi.xcodeproj/project.pbxproj src/arm/trampoline.S		\
 	 libtool-ldflags
 
@@ -235,6 +234,13 @@ libffi_convenience_la_SOURCES = $(libffi_la_SOURCES)
 nodist_libffi_convenience_la_SOURCES = $(nodist_libffi_la_SOURCES)
 
 LTLDFLAGS = $(shell $(SHELL) $(top_srcdir)/libtool-ldflags $(LDFLAGS))
+
+AM_CFLAGS =
+if FFI_DEBUG
+# Build debug. Define FFI_DEBUG on the commandline so that, when building with
+# MSVC, it can link against the debug CRT.
+AM_CFLAGS += -DFFI_DEBUG
+endif
 
 libffi_la_LDFLAGS = -no-undefined -version-info `grep -v '^\#' $(srcdir)/libtool-version` $(LTLDFLAGS) $(AM_LTLDFLAGS)
 
