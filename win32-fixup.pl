@@ -46,7 +46,7 @@ sub process_file
 	    s/\@TARGET\@/$ffi_target/g;
 	    s/\@prefix@/$prefix/g;
 	    s/\@exec_prefix@/$exec_prefix/g;
-	    s/\@libdir@/$generic_library_folder/g;
+	    s/\@toolexeclibdir@/$generic_library_folder/g;
 	    print OUTPUT;
 	}
 }
