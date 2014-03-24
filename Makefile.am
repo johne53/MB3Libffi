@@ -6,7 +6,7 @@ ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS = include testsuite man
 
-EXTRA_DIST = LICENSE ChangeLog.v1 ChangeLog.libgcj configure.host	\
+EXTRA_DIST = LICENSE ChangeLog.v1 ChangeLog.libgcj			\
 	 src/aarch64/ffi.c src/aarch64/ffitarget.h src/aarch64/sysv.S	\
 	 src/alpha/ffi.c src/alpha/osf.S			\
 	 src/alpha/ffitarget.h src/arc/ffi.c src/arc/arcompact.S	\
@@ -50,7 +50,7 @@ EXTRA_DIST = LICENSE ChangeLog.v1 ChangeLog.libgcj configure.host	\
 	 m4/ltversion.m4 src/arm/gentramp.sh src/debug.c msvcc.sh	\
 	 generate-darwin-source-and-headers.py				\
 	 libffi.xcodeproj/project.pbxproj src/arm/trampoline.S		\
-	 libtool-ldflags
+	 libtool-ldflags ChangeLog.libffi-3.1
 
 info_TEXINFOS = doc/libffi.texi
 
@@ -64,39 +64,39 @@ info_TEXINFOS = doc/libffi.texi
 # values defined in terms of make variables, as is the case for CC and
 # friends when we are called from the top level Makefile.
 AM_MAKEFLAGS = \
-	"AR_FLAGS=$(AR_FLAGS)" \
-	"CC_FOR_BUILD=$(CC_FOR_BUILD)" \
-	"CFLAGS=$(CFLAGS)" \
-	"CXXFLAGS=$(CXXFLAGS)" \
-	"CFLAGS_FOR_BUILD=$(CFLAGS_FOR_BUILD)" \
-	"CFLAGS_FOR_TARGET=$(CFLAGS_FOR_TARGET)" \
-	"INSTALL=$(INSTALL)" \
-	"INSTALL_DATA=$(INSTALL_DATA)" \
-	"INSTALL_PROGRAM=$(INSTALL_PROGRAM)" \
-	"INSTALL_SCRIPT=$(INSTALL_SCRIPT)" \
-	"JC1FLAGS=$(JC1FLAGS)" \
-	"LDFLAGS=$(LDFLAGS)" \
-	"LIBCFLAGS=$(LIBCFLAGS)" \
-	"LIBCFLAGS_FOR_TARGET=$(LIBCFLAGS_FOR_TARGET)" \
-	"MAKE=$(MAKE)" \
-	"MAKEINFO=$(MAKEINFO) $(MAKEINFOFLAGS)" \
-	"PICFLAG=$(PICFLAG)" \
-	"PICFLAG_FOR_TARGET=$(PICFLAG_FOR_TARGET)" \
-	"RUNTESTFLAGS=$(RUNTESTFLAGS)" \
-	"SHELL=$(SHELL)" \
-	"exec_prefix=$(exec_prefix)" \
-	"infodir=$(infodir)" \
-	"libdir=$(libdir)" \
-	"mandir=$(mandir)" \
-	"prefix=$(prefix)" \
-	"AR=$(AR)" \
-	"AS=$(AS)" \
-	"CC=$(CC)" \
-	"CXX=$(CXX)" \
-	"LD=$(LD)" \
-	"NM=$(NM)" \
-	"RANLIB=$(RANLIB)" \
-	"DESTDIR=$(DESTDIR)"
+	'AR_FLAGS=$(AR_FLAGS)' \
+	'CC_FOR_BUILD=$(CC_FOR_BUILD)' \
+	'CFLAGS=$(CFLAGS)' \
+	'CXXFLAGS=$(CXXFLAGS)' \
+	'CFLAGS_FOR_BUILD=$(CFLAGS_FOR_BUILD)' \
+	'CFLAGS_FOR_TARGET=$(CFLAGS_FOR_TARGET)' \
+	'INSTALL=$(INSTALL)' \
+	'INSTALL_DATA=$(INSTALL_DATA)' \
+	'INSTALL_PROGRAM=$(INSTALL_PROGRAM)' \
+	'INSTALL_SCRIPT=$(INSTALL_SCRIPT)' \
+	'JC1FLAGS=$(JC1FLAGS)' \
+	'LDFLAGS=$(LDFLAGS)' \
+	'LIBCFLAGS=$(LIBCFLAGS)' \
+	'LIBCFLAGS_FOR_TARGET=$(LIBCFLAGS_FOR_TARGET)' \
+	'MAKE=$(MAKE)' \
+	'MAKEINFO=$(MAKEINFO) $(MAKEINFOFLAGS)' \
+	'PICFLAG=$(PICFLAG)' \
+	'PICFLAG_FOR_TARGET=$(PICFLAG_FOR_TARGET)' \
+	'RUNTESTFLAGS=$(RUNTESTFLAGS)' \
+	'SHELL=$(SHELL)' \
+	'exec_prefix=$(exec_prefix)' \
+	'infodir=$(infodir)' \
+	'libdir=$(libdir)' \
+	'mandir=$(mandir)' \
+	'prefix=$(prefix)' \
+	'AR=$(AR)' \
+	'AS=$(AS)' \
+	'CC=$(CC)' \
+	'CXX=$(CXX)' \
+	'LD=$(LD)' \
+	'NM=$(NM)' \
+	'RANLIB=$(RANLIB)' \
+	'DESTDIR=$(DESTDIR)'
 
 # Subdir rules rely on $(FLAGS_TO_PASS)
 FLAGS_TO_PASS = $(AM_MAKEFLAGS)
@@ -125,7 +125,7 @@ if BFIN
 nodist_libffi_la_SOURCES += src/bfin/ffi.c src/bfin/sysv.S
 endif
 if X86
-nodist_libffi_la_SOURCES += src/x86/ffi.c src/x86/sysv.S
+nodist_libffi_la_SOURCES += src/x86/ffi.c src/x86/sysv.S src/x86/win32.S
 endif
 if X86_FREEBSD
 nodist_libffi_la_SOURCES += src/x86/ffi.c src/x86/freebsd.S
@@ -247,3 +247,5 @@ libffi_la_LDFLAGS = -no-undefined -version-info `grep -v '^\#' $(srcdir)/libtool
 AM_CPPFLAGS = -I. -I$(top_srcdir)/include -Iinclude -I$(top_srcdir)/src
 AM_CCASFLAGS = $(AM_CPPFLAGS)
 
+dist-hook:
+	if [ -d $(top_srcdir)/.git ] ; then git -C $(top_srcdir) log --no-decorate ; else echo 'See git log for history.' ; fi > $(distdir)/ChangeLog

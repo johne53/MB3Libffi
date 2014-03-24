@@ -1,7 +1,7 @@
 Status
 ======
 
-libffi-3.0.14 was released on TBD.  Check the libffi web
+libffi-3.1 was released on TBD.  Check the libffi web
 page for updates: <URL:http://sourceware.org/libffi/>.
 
 
@@ -126,6 +126,9 @@ system. Go to the directory you wish to build libffi in and run the
 "configure" program found in the root directory of the libffi source
 distribution.
 
+If you're building libffi directly from version control, configure won't
+exist yet; run ./autogen.sh first.
+
 You may want to tell configure where to install the libffi library and
 header files. To do that, use the --prefix configure switch.  Libffi
 will install under /usr/local by default. 
@@ -167,12 +170,17 @@ To install the library and header files, type "make install".
 History
 =======
 
-See the ChangeLog files for details.
+See the git log for details.
 
-3.0.14 TBD
+3.1 TBD
+	Archive off the manually maintained ChangeLog in favor of git log.
         Add AArch64 (ARM64) iOS support.
         Add Nios II support.
         Add m88k and DEC VAX support.
+	Add support for stdcall, thiscall, and fastcall on non-Windows
+	  32-bit x86 targets such as Linux.
+	Make the testsuite more robust: eliminated several spurious
+	  failures.
 	Android build fix.
 	Fix MIPS N32 ABI bug.
 	Various x86, FreeBSD and UltraSPARC IIi fixes.
