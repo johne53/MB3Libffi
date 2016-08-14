@@ -318,8 +318,11 @@ ffi_status ffi_prep_cif_machdep(ffi_cif *cif)
 #endif
 
 #ifndef X86_WIN32
+#ifndef X86_WIN64 /* This test added by JE - 14-08-2016 (FFI_STDCALL and the
+                     others are not defined if 'X86_WIN64' is defined !!)  */
   if (cif->abi != FFI_STDCALL && cif->abi != FFI_THISCALL && cif->abi != FFI_FASTCALL)
-    cif->bytes = (cif->bytes + 15) & ~0xF;
+#endif
+	cif->bytes = (cif->bytes + 15) & ~0xF;
 #endif
 
   return FFI_OK;
