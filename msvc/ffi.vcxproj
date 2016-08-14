@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release with Debugging Capability|x64">
+      <Configuration>Release with Debugging Capability</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B85A2FDC-64CB-452F-AB62-7EEAF0000220}</ProjectGuid>
+    <RootNamespace>ffi</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release with Debugging Capability|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\ffi.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\ffi.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release with Debugging Capability|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\ffi.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\bin\</OutDir>
+    <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\obj\$(ProjectName)\</IntDir>
+    <TargetName>$(DllPrefix)$(ProjectName)64$(DllSuffix)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\bin\</OutDir>
+    <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\obj\$(ProjectName)\</IntDir>
+    <TargetName>$(DllPrefix)$(ProjectName)64$(DllSuffix)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release with Debugging Capability|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\bin\</OutDir>
+    <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\obj\$(ProjectName)\</IntDir>
+    <TargetName>$(DllPrefix)$(ProjectName)64$(DllSuffix)RDC</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PreBuildEvent>
+      <Message>Prepare configuration files</Message>
+      <Command>cd..
+copy /Y "include\ffi.h" "$(GenericIncludeFolder)\ffi"
+copy /Y "src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
+</Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;..\src\x86;..\..\MB3Libffi\include;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>X86_WIN64;WIN32;DEBUG;_DEBUG;_WIN64;_WINDOWS;_WINDLL;_CRT_SECURE_NO_WARNINGS;FFI_BUILDING;PIC;HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <PrecompiledHeaderOutputFile />
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+      <StringPooling>false</StringPooling>
+      <ForcedIncludeFiles>$(TargetSxsFolder)\targetsxs.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0809</Culture>
+    </ResourceCompile>
+    <PreLinkEvent>
+      <Message>Use existing Module Definition file</Message>
+      <Command>cd ..</Command>
+    </PreLinkEvent>
+    <Link>
+      <OutputFile>$(OutDir)$(DllPrefix)$(ProjectName)64$(DllSuffix)D.dll</OutputFile>
+      <AdditionalLibraryDirectories>$(ProjectDir)$(Configuration)\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>$(ProjectDir)\$(ProjectName).def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <PostBuildEvent>
+      <Command>copy /Y "$(OutDir)$(TargetName).dll" "$(Debug64TargetFolder)\$(TargetName).dll"
+copy /Y "$(OutDir)$(TargetName).dll" "$(Debug64TestSuiteFolder)\$(TargetName).dll"
+copy /Y "$(OutDir)$(TargetName).lib" "$(GenericWin64LibraryFolder)\$(TargetName).lib"
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PreBuildEvent>
+      <Message>Prepare configuration files</Message>
+      <Command>cd..
+copy /Y "include\ffi.h" "$(GenericIncludeFolder)\ffi"
+copy /Y "src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
+</Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;..\src\x86;..\..\MB3Libffi\include;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>X86_WIN64;_SECURE_SCL=0;NDEBUG;WIN32;_WIN64;_WINDOWS;_WINDLL;_CRT_SECURE_NO_WARNINGS;FFI_BUILDING;PIC;HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>false</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <PrecompiledHeaderOutputFile />
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <CompileAs>CompileAsC</CompileAs>
+      <ForcedIncludeFiles>$(TargetSxsFolder)\targetsxs.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0809</Culture>
+    </ResourceCompile>
+    <PreLinkEvent>
+      <Message>Use existing Module Definition file</Message>
+      <Command>cd ..</Command>
+    </PreLinkEvent>
+    <Link>
+      <OutputFile>$(OutDir)$(DllPrefix)$(ProjectName)64$(DllSuffix).dll</OutputFile>
+      <AdditionalLibraryDirectories>$(ProjectDir)$(Configuration)\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>$(ProjectDir)\$(ProjectName).def</ModuleDefinitionFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <PostBuildEvent>
+      <Command>copy /Y "$(OutDir)$(TargetName).dll" "$(Release64TargetFolder)\$(TargetName).dll"
+copy /Y "$(OutDir)$(TargetName).dll" "$(Release64TestSuiteFolder)\$(TargetName).dll"
+copy /Y "$(OutDir)$(TargetName).lib" "$(GenericWin64LibraryFolder)\$(TargetName).lib"
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release with Debugging Capability|x64'">
+    <PreBuildEvent>
+      <Message>Prepare configuration files</Message>
+      <Command>mkdir "$(GenericLibraryFolder)\pkgconfig" 2&gt; NUL
+mkdir "$(GenericIncludeFolder)\ffi" 2&gt; NUL
+cd..
+perl win32-fixup.pl "-X64"
+copy /Y "include\ffi.h" "$(GenericIncludeFolder)\ffi"
+copy /Y "src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
+</Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;..\src\x86;..\..\MB3Libffi\include;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>X86_WIN64;_SECURE_SCL=0;NDEBUG;WIN32;_WIN64;_WINDOWS;_WINDLL;_CRT_SECURE_NO_WARNINGS;FFI_BUILDING;PIC;HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>false</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <PrecompiledHeaderOutputFile />
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <ForcedIncludeFiles>$(TargetSxsFolder)\targetsxs.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0809</Culture>
+    </ResourceCompile>
+    <PreLinkEvent>
+      <Message>Generate Module Definition file</Message>
+      <Command>echo EXPORTS &gt; ffi.def
+cl /EP -DX86_WIN64 ..\msvc\ffi.symbols &gt;&gt; $(ProjectDir)\ffi.def
+</Command>
+    </PreLinkEvent>
+    <Link>
+      <OutputFile>$(OutDir)$(DllPrefix)$(ProjectName)64$(DllSuffix)RDC.dll</OutputFile>
+      <AdditionalLibraryDirectories>$(ProjectDir)$(Configuration)\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>$(ProjectDir)\$(ProjectName).def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <PostBuildEvent>
+      <Command>copy /Y "..\include\ffi.h" "$(GenericIncludeFolder)\ffi"
+copy /Y "..\src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
+copy /Y "$(OutDir)$(TargetName).dll" "$(Release64TestSuiteFolder)\$(TargetName).dll"
+copy /Y "$(OutDir)$(TargetName).lib" "$(GenericWin64LibraryFolder)\$(TargetName).lib"
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\closures.c" />
+    <ClCompile Include="..\src\debug.c" />
+    <ClCompile Include="..\src\java_raw_api.c" />
+    <ClCompile Include="..\src\prep_cif.c" />
+    <ClCompile Include="..\src\raw_api.c" />
+    <ClCompile Include="..\src\types.c" />
+    <ClCompile Include="..\src\x86\ffi.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\ffi.h" />
+    <ClInclude Include="..\src\x86\ffitarget.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ffi\ffi.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="..\src\x86\win64.asm" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>
