@@ -81,7 +81,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)\$(DllPrefix)$(ProjectName)32$(DllSuffix)D.dll"
 				AdditionalLibraryDirectories="$(ProjectDir)$(ConfigurationName)\bin"
-				ModuleDefinitionFile="$(ProjectDir)\$(ProjectName).def"
+				ModuleDefinitionFile="$(ProjectDir)\$(ProjectName)32.def"
 				EmbedManagedResourceFile=""
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -179,7 +179,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)\$(DllPrefix)$(ProjectName)32$(DllSuffix).dll"
 				AdditionalLibraryDirectories="$(ProjectDir)$(ConfigurationName)\bin"
-				ModuleDefinitionFile="$(ProjectDir)\$(ProjectName).def"
+				ModuleDefinitionFile="$(ProjectDir)\$(ProjectName)32.def"
 				EmbedManagedResourceFile=""
 				SubSystem="2"
 			/>
@@ -269,13 +269,13 @@
 			<Tool
 				Name="VCPreLinkEventTool"
 				Description="Generate Module Definition file"
-				CommandLine="echo EXPORTS &gt; ffi.def&#x0D;&#x0A;cl /EP -DX86_WIN32 ..\msvc\ffi.symbols &gt;&gt; $(ProjectDir)\ffi.def&#x0D;&#x0A;"
+				CommandLine="echo EXPORTS &gt; ffi32.def&#x0D;&#x0A;cl /EP -DX86_WIN32 ..\msvc\ffi.symbols &gt;&gt; $(ProjectDir)\ffi32.def&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)\$(DllPrefix)$(ProjectName)32$(DllSuffix)RDC.dll"
 				AdditionalLibraryDirectories="$(ProjectDir)$(ConfigurationName)\bin"
-				ModuleDefinitionFile="$(ProjectDir)\$(ProjectName).def"
+				ModuleDefinitionFile="$(ProjectDir)\$(ProjectName)32.def"
 				EmbedManagedResourceFile=""
 				GenerateDebugInformation="true"
 				SubSystem="2"

@@ -56,13 +56,13 @@ sub process_file
 	}
 }
 
-process_file ("fficonfig.h");
-process_file ("include/ffi.h");
 process_file ("libffi.pc");
 
 my $command=join(' ',@ARGV);
 if ($command eq -buildall) {
 	process_file ("ffi.props");
 	process_file ("ffi.vsprops");
+	process_file ("fficonfig.h");
+	process_file ("include/ffi.h");
 	process_file ("msvc/ffi/ffi.rc");
 }

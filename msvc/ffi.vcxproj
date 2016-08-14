@@ -110,7 +110,7 @@ copy /Y "src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
     <Link>
       <OutputFile>$(OutDir)$(DllPrefix)$(ProjectName)64$(DllSuffix)D.dll</OutputFile>
       <AdditionalLibraryDirectories>$(ProjectDir)$(Configuration)\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ModuleDefinitionFile>$(ProjectDir)\$(ProjectName).def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>$(ProjectDir)\$(ProjectName)64.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
@@ -159,7 +159,7 @@ copy /Y "src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
     <Link>
       <OutputFile>$(OutDir)$(DllPrefix)$(ProjectName)64$(DllSuffix).dll</OutputFile>
       <AdditionalLibraryDirectories>$(ProjectDir)$(Configuration)\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ModuleDefinitionFile>$(ProjectDir)\$(ProjectName).def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>$(ProjectDir)\$(ProjectName)64.def</ModuleDefinitionFile>
       <SubSystem>Windows</SubSystem>
     </Link>
     <Bscmake>
@@ -205,14 +205,15 @@ copy /Y "src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
     </ResourceCompile>
     <PreLinkEvent>
       <Message>Generate Module Definition file</Message>
-      <Command>echo EXPORTS &gt; ffi.def
-cl /EP -DX86_WIN64 ..\msvc\ffi.symbols &gt;&gt; $(ProjectDir)\ffi.def
+      <Command>echo EXPORTS &gt; ffi64.def
+
+cl /EP -DX86_WIN64 ..\msvc\ffi.symbols &gt;&gt; $(ProjectDir)\ffi64.def
 </Command>
     </PreLinkEvent>
     <Link>
       <OutputFile>$(OutDir)$(DllPrefix)$(ProjectName)64$(DllSuffix)RDC.dll</OutputFile>
       <AdditionalLibraryDirectories>$(ProjectDir)$(Configuration)\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ModuleDefinitionFile>$(ProjectDir)\$(ProjectName).def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>$(ProjectDir)\$(ProjectName)64.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
