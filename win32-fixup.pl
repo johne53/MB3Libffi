@@ -13,7 +13,7 @@ $micro = 14;
 $interface_age = 1;
 $have_long_double = 1;
 $ffi_exec_trampoline_table = 0;
-$ffi_target = "X86_WIN32";
+$ffi_target = "TARGET_UNKNOWN";
 $exec_prefix = "lib";
 
 sub process_file
@@ -42,6 +42,11 @@ sub process_file
 	    s/\@Release32TestSuiteFolder@/$release32_testsuite_folder/g;
 	    s/\@Debug32TargetFolder@/$debug32_target_folder/g;
 	    s/\@Release32TargetFolder@/$release32_target_folder/g;
+	    s/\@GenericWin64LibraryFolder@/$generic_win64_library_folder/g;
+	    s/\@Debug64TestSuiteFolder@/$debug64_testsuite_folder/g;
+	    s/\@Release64TestSuiteFolder@/$release64_testsuite_folder/g;
+	    s/\@Debug64TargetFolder@/$debug64_target_folder/g;
+	    s/\@Release64TargetFolder@/$release64_target_folder/g;
 	    s/\@TargetSxSFolder@/$target_sxs_folder/g;
 	    s/\@TARGET\@/$ffi_target/g;
 	    s/\@prefix@/$prefix/g;
@@ -57,6 +62,7 @@ process_file ("libffi.pc");
 
 my $command=join(' ',@ARGV);
 if ($command eq -buildall) {
+	process_file ("ffi.props");
 	process_file ("ffi.vsprops");
 	process_file ("msvc/ffi/ffi.rc");
 }
