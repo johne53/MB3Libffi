@@ -28,7 +28,7 @@ BEGIN
             VALUE "FileDescription", "Libffi for Ardour and Mixbus"
             VALUE "FileVersion", "@FFI_MAJOR_VERSION@, @FFI_MINOR_VERSION@, @FFI_MICRO_VERSION@, @FFI_INTERFACE_AGE@"
             VALUE "InternalName", "libffi-5"
-            VALUE "LegalCopyright", "Built for Windows by John Emmas © 2012 - 2013"
+            VALUE "LegalCopyright", "Built for Windows by John Emmas © 2012 - 2016"
             VALUE "OriginalFilename", "libffi-5.dll"
             VALUE "ProductName", "ffi"
             VALUE "ProductVersion", "@FFI_MAJOR_VERSION@, @FFI_MINOR_VERSION@, @FFI_MICRO_VERSION@, @FFI_INTERFACE_AGE@"

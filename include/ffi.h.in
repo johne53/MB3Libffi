@@ -58,8 +58,20 @@ extern "C" {
 #endif
 
 /* Specify which architecture libffi is configured for. */
-#ifndef @TARGET@
-#define @TARGET@
+#ifdef _MSC_VER
+  #ifdef _WIN64
+    #ifndef X86_WIN64
+      #define X86_WIN64
+    #endif
+  #else
+    #ifndef X86_WIN32
+      #define X86_WIN32
+    #endif
+  #endif
+#else
+  #ifndef @TARGET@
+    #define @TARGET@
+  #endif
 #endif
 
 /* ---- System configuration information --------------------------------- */
