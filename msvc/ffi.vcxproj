@@ -23,20 +23,20 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release with Debugging Capability|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -108,7 +108,6 @@ copy /Y "src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
       <Command>cd ..</Command>
     </PreLinkEvent>
     <Link>
-      <OutputFile>$(OutDir)$(DllPrefix)$(ProjectName)64$(DllSuffix)D.dll</OutputFile>
       <AdditionalLibraryDirectories>$(ProjectDir)$(Configuration)\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>$(ProjectDir)\$(ProjectName)64.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -118,9 +117,9 @@ copy /Y "src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Bscmake>
     <PostBuildEvent>
-      <Command>copy /Y "$(OutDir)$(TargetName).dll" "$(Debug64TargetFolder)\$(TargetName).dll"
-copy /Y "$(OutDir)$(TargetName).dll" "$(Debug64TestSuiteFolder)\$(TargetName).dll"
-copy /Y "$(OutDir)$(TargetName).lib" "$(GenericWin64LibraryFolder)\$(TargetName).lib"
+      <Command>copy /Y "$(TargetPath)" "$(Debug64TargetFolder)\$(TargetName)$(TargetExt)"
+copy /Y "$(TargetPath)" "$(Debug64TestSuiteFolder)\$(TargetName)$(TargetExt)"
+copy /Y "$(OutDir)$(TargetName)$(LibraryExt)" "$(GenericWin64LibraryFolder)\$(TargetName)$(LibraryExt)"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -140,13 +139,13 @@ copy /Y "src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
       <StringPooling>false</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <PrecompiledHeaderOutputFile />
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <CompileAs>CompileAsC</CompileAs>
       <ForcedIncludeFiles>$(TargetSxsFolder)\targetsxs.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -157,7 +156,6 @@ copy /Y "src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
       <Command>cd ..</Command>
     </PreLinkEvent>
     <Link>
-      <OutputFile>$(OutDir)$(DllPrefix)$(ProjectName)64$(DllSuffix).dll</OutputFile>
       <AdditionalLibraryDirectories>$(ProjectDir)$(Configuration)\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>$(ProjectDir)\$(ProjectName)64.def</ModuleDefinitionFile>
       <SubSystem>Windows</SubSystem>
@@ -166,9 +164,9 @@ copy /Y "src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Bscmake>
     <PostBuildEvent>
-      <Command>copy /Y "$(OutDir)$(TargetName).dll" "$(Release64TargetFolder)\$(TargetName).dll"
-copy /Y "$(OutDir)$(TargetName).dll" "$(Release64TestSuiteFolder)\$(TargetName).dll"
-copy /Y "$(OutDir)$(TargetName).lib" "$(GenericWin64LibraryFolder)\$(TargetName).lib"
+      <Command>copy /Y "$(TargetPath)" "$(Release64TargetFolder)\$(TargetName)$(TargetExt)"
+copy /Y "$(TargetPath)" "$(Release64TestSuiteFolder)\$(TargetName)$(TargetExt)"
+copy /Y "$(OutDir)$(TargetName)$(LibraryExt)" "$(GenericWin64LibraryFolder)\$(TargetName)$(LibraryExt)"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -190,7 +188,6 @@ copy /Y "src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
       <PreprocessorDefinitions>X86_WIN64;_SECURE_SCL=0;NDEBUG;WIN32;_WIN64;_WINDOWS;_WINDLL;_CRT_SECURE_NO_WARNINGS;FFI_BUILDING;PIC;HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>false</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
       <PrecompiledHeaderOutputFile />
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -198,6 +195,7 @@ copy /Y "src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
       <CompileAs>CompileAsC</CompileAs>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <ForcedIncludeFiles>$(TargetSxsFolder)\targetsxs.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -206,12 +204,10 @@ copy /Y "src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
     <PreLinkEvent>
       <Message>Generate Module Definition file</Message>
       <Command>echo EXPORTS &gt; ffi64.def
-
 cl /EP -DX86_WIN64 ..\msvc\ffi.symbols &gt;&gt; $(ProjectDir)\ffi64.def
 </Command>
     </PreLinkEvent>
     <Link>
-      <OutputFile>$(OutDir)$(DllPrefix)$(ProjectName)64$(DllSuffix)RDC.dll</OutputFile>
       <AdditionalLibraryDirectories>$(ProjectDir)$(Configuration)\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>$(ProjectDir)\$(ProjectName)64.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -223,8 +219,8 @@ cl /EP -DX86_WIN64 ..\msvc\ffi.symbols &gt;&gt; $(ProjectDir)\ffi64.def
     <PostBuildEvent>
       <Command>copy /Y "..\include\ffi.h" "$(GenericIncludeFolder)\ffi"
 copy /Y "..\src\x86\ffitarget.h" "$(GenericIncludeFolder)\ffi"
-copy /Y "$(OutDir)$(TargetName).dll" "$(Release64TestSuiteFolder)\$(TargetName).dll"
-copy /Y "$(OutDir)$(TargetName).lib" "$(GenericWin64LibraryFolder)\$(TargetName).lib"
+copy /Y "$(TargetPath)" "$(Release64TestSuiteFolder)\$(TargetName)$(TargetExt)"
+copy /Y "$(OutDir)$(TargetName)$(LibraryExt)" "$(GenericWin64LibraryFolder)\$(TargetName)$(LibraryExt)"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
