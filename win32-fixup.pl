@@ -48,12 +48,19 @@ sub process_file
 	    s/\@Debug64TargetFolder@/$debug64_target_folder/g;
 	    s/\@Release64TargetFolder@/$release64_target_folder/g;
 	    s/\@TargetSxSFolder@/$target_sxs_folder/g;
+	    s/\@LibraryExt@/$library_ext/g;
 	    s/\@TARGET\@/$ffi_target/g;
 	    s/\@prefix@/$prefix/g;
 	    s/\@exec_prefix@/$exec_prefix/g;
 	    s/\@toolexeclibdir@/$generic_library_folder/g;
 	    print OUTPUT;
 	}
+}
+
+if (-1 != index($command, "-linux")) {
+	$library_ext = ".a";
+} else {
+	$library_ext = ".lib";
 }
 
 process_file ("libffi.pc");
